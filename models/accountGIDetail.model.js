@@ -13,7 +13,7 @@ export default (sequelize) =>{
         adventure_rank: {
             type: DataTypes.INTEGER
         },
-        world_lever: {
+        world_level: {
             type: DataTypes.INTEGER
         },
         limited_characters: {
