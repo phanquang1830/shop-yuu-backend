@@ -10,7 +10,7 @@ export default (sequelize) =>{
         server: {
             type: DataTypes.STRING(50)
         },
-        union_lever: {
+        union_level: {
             type: DataTypes.INTEGER
         },
         limited_characters: {
