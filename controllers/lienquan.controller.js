@@ -1,16 +1,18 @@
 import asyncHandler from "express-async-handler";
 import { Account, AccountLQDetail, sequelize } from "../models/index.model.js";
 import { NotFoundError } from "../utils/error/index.js";
+import getFilteredLienquanAccounts from "../repositories/lienquan.repositories.js";
 
 // @desc Fetch All Account Lien Quan
 // @route GET /api/lienquan
 // @access Public
 const getAllAccountLQ = asyncHandler(async (req, res) => {
-  const accounts = await AccountLQDetail.findAll({ include: Account });
+  const result = await getFilteredLienquanAccounts(req.query);
+
   res.status(200).json({
     statusCode: 200,
     message: "Get All Account Lien Quan Successfully!",
-    account: accounts,
+    ...result,
   });
 });
 
