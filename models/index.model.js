@@ -4,12 +4,16 @@ import AccountModel from "./account.model.js";
 import AccountGIDetailModel from "./accountGIDetail.model.js";
 import AccountLQDetailModel from "./accountLQDetail.model.js";
 import AccountWWDetailModel from "./accountWWDetail.model.js";
+import UserModel from "./user.model.js";
+import OtpCodeModel from "./otpCode.model.js";
 
 //Khởi tạo model
 const Account = AccountModel(sequelize);
 const AccountGIDetail = AccountGIDetailModel(sequelize);
 const AccountLQDetail = AccountLQDetailModel(sequelize);
 const AccountWWDetail = AccountWWDetailModel(sequelize);
+const User = UserModel(sequelize);
+const OtpCode = OtpCodeModel(sequelize);
 
 // Thiết lập quan hệ
 // Account & AccountGIDetail
@@ -45,5 +49,7 @@ export {
     Account,
     AccountGIDetail,
     AccountLQDetail,
-    AccountWWDetail
+    AccountWWDetail,
+    User,
+    OtpCode
 }
