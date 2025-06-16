@@ -10,7 +10,7 @@ export default (sequelize) =>{
         rank: {
             type: DataTypes.STRING(50)
         },
-        lever: {
+        level: {
             type: DataTypes.INTEGER
         },
         hero_count: {
