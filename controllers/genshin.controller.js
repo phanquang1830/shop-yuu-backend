@@ -1,21 +1,23 @@
 import asyncHandler from "express-async-handler";
 import { Account, AccountGIDetail, sequelize } from "../models/index.model.js";
 import { NotFoundError } from "../utils/error/index.js";
+import getFilteredGenshinAccounts from "../repositories/genshin.repositories.js";
 
 // @desc Fetch All Account Genshin
-// @route GET /api/genshin
+// @route GET /api/genshinimpact
 // @access Public
 const getAllAccountGI = asyncHandler(async (req, res) => {
-  const account = await AccountGIDetail.findAll({ include: Account });
+  const result = await getFilteredGenshinAccounts(req.query); // Gửi query xuống hàm getFilteredGenshinAccounts
+
   res.status(200).json({
     statusCode: 200,
     message: "Get All account genshin Successfull!",
-    account: account,
+    ...result
   });
 });
 
 // @desc Fetch single Account Genshin
-// @route GET /api/genshin/:id
+// @route GET /api/genshinimpact/:id
 // @access Public
 const getAccountGIById = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -34,7 +36,7 @@ const getAccountGIById = asyncHandler(async (req, res) => {
 });
 
 // @desc Create Account Genshin
-// @route POST /api/genshin
+// @route POST /api/genshinimpact
 // @access Private
 const createAccountGI = asyncHandler(async (req, res) => {
   const {
@@ -112,7 +114,7 @@ const createAccountGI = asyncHandler(async (req, res) => {
 });
 
 // @desc Update Account Genshin
-// @route PUT /api/genshin/:id
+// @route PUT /api/genshinimpact/:id
 // @access Private
 const updateAccountGI = asyncHandler(async (req, res) =>{
     const { id } = req.params;
@@ -198,7 +200,7 @@ const updateAccountGI = asyncHandler(async (req, res) =>{
 })
 
 // @desc Delete Account Genshin
-// @route DELETE /api/genshin/:id
+// @route DELETE /api/genshinimpact/:id
 // @access Private
 const deleteAccountGI = asyncHandler(async (req, res) =>{
     const { id } = req.params;
