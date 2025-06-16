@@ -1,16 +1,17 @@
 import asyncHandler from "express-async-handler";
 import { Account, AccountWWDetail, sequelize } from "../models/index.model.js";
 import { NotFoundError } from "../utils/error/index.js";
+import getFilteredWutheringWavesAccounts from "../repositories/wutheringwaves.repositories.js";
 
 // @desc Get All Account Wuthering waves
 // @route GET /api/wutheringwaves
 // @access Public
 const getAllAccountWW = asyncHandler(async (req, res) => {
-  const accounts = await AccountWWDetail.findAll({ include: Account });
+  const result = await getFilteredWutheringWavesAccounts(req.query)
   res.status(200).json({
     statusCode: 200,
     message: "Get All Account Wuthering Waves Successfully!",
-    accounts: accounts,
+    ...result,
   });
 });
 
