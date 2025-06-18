@@ -1,29 +1,20 @@
 import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
-import { Op } from "sequelize";
+import { Op} from "sequelize";
 import asyncHandler from "express-async-handler";
 
 import { User, OtpCode } from "../models/index.model.js";
-import { generateToken, verifyToken } from "../utils/jwt.js";
+import { generateToken} from "../utils/jwt.js";
+import transporter from "../utils/mailer.js";
 
 // Tạo mẫ Otp ngẫn nhiên từ 100000 => 900000 trả về dưới dạng String
 const generateOtp = () =>
   Math.floor(100000 + Math.random() * 900000).toString();
 
-// Cấu hình gửi gmail
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.SMTP_USER, // email dùng gửi otp
-    pass: process.env.SMTP_PASS, // app password
-  },
-});
-
 // @desc Register User
 // @route POST /api/auth/register
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, password, email, avatar_url } = req.body;
+  const { username, password, email } = req.body;
 
   const existing = await User.findOne({ where: { email } });
   if (existing) return res.status(400).json({ message: "Email đã tồn tại!" });
@@ -34,7 +25,6 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     password: hashedPassword,
     email,
-    avatar_url,
     is_active: false,
   });
 
@@ -108,12 +98,10 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   if (!user.is_active) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "Tài khoản chưa được xác minh, vui lòng xác minh tài khoản của bạn!",
-      });
+    return res.status(400).json({
+      message:
+        "Tài khoản chưa được xác minh, vui lòng xác minh tài khoản của bạn!",
+    });
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
@@ -137,4 +125,74 @@ const loginUser = asyncHandler(async (req, res) => {
   });
 });
 
-export { registerUser, verifyOtp, loginUser };
+// @desc send OTP to reset password
+// @route /api/auth/forgot-password
+// @access Public
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ where: { email } });
+
+  if (!user) {
+    res
+      .status(400)
+      .json({ message: "Không tìm thấy tài khoản với email này!" });
+  }
+
+  const code = generateOtp();
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+
+  await OtpCode.destroy({ where: { email } }); // xóa mã cũ nếu có
+
+  await OtpCode.create({
+    email,
+    code,
+    expires_at: expiresAt,
+  });
+
+  await transporter.sendMail({
+    from: process.env.SMTP_USER,
+    to: email,
+    subject: "Đặt lại mật khẩu",
+    text: `Mã OTP để đặt lại mật khẩu của bạn là ${code}. Có hiệu lực trong 10 phút!`,
+  });
+
+  res.status(200).json({
+    message: `Mã OTP đặt lại mật khẩu đã được gửi tới email ${email}`,
+  });
+});
+
+// @desc set new password
+// @route /api/auth/reset-password
+// @access Public
+const resetPassword = asyncHandler(async (req, res) => {
+  const { email, code, newPassword } = req.body;
+
+  const otpEntry = await OtpCode.findOne({
+    where: {
+      email,
+      code,
+      //Op.gt: viết tắt của greater than (lớn hơn) thời điểm hiện tại
+      //Op.lt: nhỏ hơn hiện tại
+      //Op.eq: bằng
+      //Op.ne: khác
+      expires_at: { [Op.gt]: new Date() }, // Chưa hết hạn
+    },
+  });
+
+  if (!otpEntry) {
+    return res
+      .status(400)
+      .json({ message: "Mã OTP không hợp lệ hoặc đã hết hạn!" });
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  await User.update({ password: hashedPassword }, { where: { email } });
+
+  await OtpCode.destroy({ where: { email } });
+
+  res.status(200).json({ message: "Mật khẩu đã được đặt lại thành công!" });
+});
+
+export { registerUser, verifyOtp, loginUser, forgotPassword, resetPassword };
