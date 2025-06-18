@@ -37,8 +37,7 @@ const updateProfile = asyncHandler(async (req, res) => {
   const { id } = req.user;
   const { username, email} = req.body ?? {};
 
-  const avatarPath = req.file ? `/uploads/${req.file.filename}` : null
-
+  const avatarPath = req.file?.path ?? null;
 
   if(!username && !email && !avatarPath) {
     return res.status(400).json({
