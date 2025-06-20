@@ -9,7 +9,8 @@ import genshinRoute from './routes/genshin.route.js'
 import lienquanRoute from './routes/lienquan.route.js'
 import authRoute from './routes/auth.route.js'
 import userRoute from './routes/user.route.js'
-import contactRoute from "./controllers/contact.controller.js";
+import contactRoute from "./routes/contact.route.js";
+import cartRoute from "./routes/cart.route.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use('/api/lienquan', lienquanRoute)
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 app.use('/api/contact', contactRoute)
+app.use('/api/cart', cartRoute);
 
 app.use(notFound)
 app.use(errorHandler)
