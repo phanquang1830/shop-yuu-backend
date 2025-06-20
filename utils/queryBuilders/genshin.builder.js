@@ -3,6 +3,16 @@ import { Op } from "sequelize";
 const buildGenshinQuery = (query) =>{
     const where = {};
 
+    if(query.keyword) {
+        const keyword = query.keyword.trim().toLowerCase();
+
+        where[Op.or] = [
+            { server: { [Op.like]: `%${keyword}%` } },
+            { adventure_rank: isNaN(Number(keyword)) ? undefined : Number(keyword) },
+            { limited_characters: { [Op.like]: `%${keyword}%` }},
+        ].filter((condition) => !Object.values(condition).includes(undefined));
+    }
+
     if(query.server) {
         where.server = query.server;
     }
