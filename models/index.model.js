@@ -7,6 +7,7 @@ import AccountWWDetailModel from "./accountWWDetail.model.js";
 import UserModel from "./user.model.js";
 import OtpCodeModel from "./otpCode.model.js";
 import contactMessageModel from "./contactMessage.model.js";
+import CartModel from "./cart.model.js";
 
 //Khởi tạo model
 const Account = AccountModel(sequelize);
@@ -16,6 +17,7 @@ const AccountWWDetail = AccountWWDetailModel(sequelize);
 const User = UserModel(sequelize);
 const OtpCode = OtpCodeModel(sequelize);
 const ContactMessage = contactMessageModel(sequelize);
+const Cart = CartModel(sequelize);
 
 // Thiết lập quan hệ
 // Account & AccountGIDetail
@@ -41,8 +43,27 @@ Account.hasOne(AccountWWDetail, {
     foreignKey: 'account_ww_id',
     onDelete: 'CASCADE'
 });
+
 AccountWWDetail.belongsTo(Account, {
     foreignKey: 'account_ww_id'
+});
+
+//hasMany: mối quan hệ 1- nhiều
+//User & Cart
+//Một người dùng (User) có thể thêm nhiều món vào giỏ (Cart)
+User.hasMany(Cart, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+//Account & cart
+//Một tài khoản (Account) có thể nằm trong nhiều giỏ hàng khác nhau 
+Account.hasMany(Cart, {
+    foreignKey: 'account_id',
+    onDelete: 'CASCADE'
+});
+Cart.belongsTo(Account, {
+  foreignKey: 'account_id'
 });
 
 // Export lại sequelize để khi import thì import chung cho tiện
@@ -54,5 +75,6 @@ export {
     AccountWWDetail,
     User,
     OtpCode,
-    ContactMessage
+    ContactMessage,
+    Cart
 }
