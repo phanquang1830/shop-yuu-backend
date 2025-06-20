@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/profile", protect, getProfile);
 
 //upload.single('avatar'): dòng này cho phép upload duy nhất 1 file và tên field là avatar
-router.post(
+router.put(
   "/update-profile",
   protect,
   upload.single("avatar"),
