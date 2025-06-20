@@ -22,7 +22,7 @@ const contact = asyncHandler(async (req, res) => {
   });
 
   // Success response
-  return res.status(200).json({ message: "Gửi tin nhắn thành công!" });
+  return res.status(200).json({ message: "Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!" });
 });
 
 export default contact;
