@@ -4,6 +4,15 @@ import { Op } from "sequelize";
 const buildLienQuanQuery = (query) =>{
     const where = {};
 
+    if(query.keyword) {
+        const keyword = query.keyword.trim().toLowerCase();
+
+        where[Op.or] = [
+            { rank: { [Op.like]: `%${keyword}%` }},
+            { level: isNaN(Number(keyword)) ? undefined : Number(keyword)},
+        ].filter((condition) => !Object.values(condition).includes(undefined));
+    }
+
     if(query.rank) {
         // Không phân biệt hoa thường 
         where.rank = {
