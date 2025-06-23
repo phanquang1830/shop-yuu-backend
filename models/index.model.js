@@ -8,6 +8,7 @@ import UserModel from "./user.model.js";
 import OtpCodeModel from "./otpCode.model.js";
 import contactMessageModel from "./contactMessage.model.js";
 import CartModel from "./cart.model.js";
+import OrderModel from "./order.model.js";
 
 //Khởi tạo model
 const Account = AccountModel(sequelize);
@@ -18,6 +19,7 @@ const User = UserModel(sequelize);
 const OtpCode = OtpCodeModel(sequelize);
 const ContactMessage = contactMessageModel(sequelize);
 const Cart = CartModel(sequelize);
+const Order = OrderModel(sequelize);
 
 // Thiết lập quan hệ
 // Account & AccountGIDetail
@@ -66,6 +68,18 @@ Cart.belongsTo(Account, {
   foreignKey: 'account_id'
 });
 
+// Một người dùng có thể có nhiều đơn hàng
+User.hasMany(Order, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+});
+
+// Một đơn hàng chỉ thuộc về một người dùng
+Order.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+
 // Export lại sequelize để khi import thì import chung cho tiện
 export {
     sequelize,
@@ -76,5 +90,6 @@ export {
     User,
     OtpCode,
     ContactMessage,
-    Cart
+    Cart,
+    Order
 }
