@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import sequelize from './configs/db.js'; // Đường dẫn tới file kết nối Sequelize của anh
+import sequelize from './config/db.js'; // Đường dẫn tới file kết nối Sequelize của anh
 
 (async () => {
   try {
