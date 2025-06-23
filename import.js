@@ -4,7 +4,7 @@ import sequelize from './config/db.js'; // Đường dẫn tới file kết nố
 (async () => {
   try {
     console.log('👉 Đang đọc file SQL...')
-    const sql = await fs.readFile('./data.sql', 'utf-8');
+    const sql = await fs.readFile('./shop-yuu.sql', 'utf-8');
 
     // Tách từng câu SQL theo dấu chấm phẩy
     const statements = sql
