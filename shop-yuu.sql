@@ -1,5 +1,3 @@
-CREATE DATABASE Shopyuu;
-
 CREATE TABLE accounts (
     account_id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(50) NOT NULL,
@@ -127,16 +125,7 @@ INSERT INTO accounts (code, game_type, description, status, account_information,
 ('LQ008', 'LienQuan', 'Acc rank thấp', 'chưa bán', 'Acc cơ bản', 'https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-8.jpg?7', 'userlq8', 'pass8', 400000, NULL, NULL, NULL),
 ('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL);
 INSERT INTO accounts (code, game_type, description, status, account_information, img_url, username, password, price, discount_price, discount_note, discount_expire_at) VALUES
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL),
-('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL);
+
 
 
 INSERT INTO accounts_lq_details (account_lq_id, `rank`, level, hero_count, skin_count) VALUES
@@ -166,18 +155,6 @@ INSERT INTO account_gi_details (account_gi_id, server, adventure_rank, world_lev
 (11, 'Server GI4', 35, 45, 'CharGI6', 'WeaponGI5, WeaponGI6', 3700, 180, 110, 'Email'),
 (17, 'Server GI5', 25, 35, 'CharGI7', 'WeaponGI7', 3200, 130, 90, 'Facebook'),
 (20, 'Server GI6', 45, 55, 'CharGI8, CharGI9', 'WeaponGI8', 4800, 280, 140, 'Google');
-INSERT INTO account_gi_details (account_gi_id, server, adventure_rank, world_level, limited_characters, limited_weapons, primogems, intertwined_fate, acquaint_fate, login_method) VALUES
-(21, 'Server GI1', 50, 60, 'CharGI1, CharGI2', 'WeaponGI1, WeaponGI2', 5000, 300, 150, 'Email'),
-(22, 'Server GI2', 40, 50, 'CharGI3', 'WeaponGI3', 4000, 200, 120, 'Facebook'),
-(23, 'Server GI3', 30, 40, 'CharGI4, CharGI5', 'WeaponGI4', 3500, 150, 100, 'Google'),
-(24, 'Server GI4', 35, 45, 'CharGI6', 'WeaponGI5, WeaponGI6', 3700, 180, 110, 'Email'),
-(25, 'Server GI5', 25, 35, 'CharGI7', 'WeaponGI7', 3200, 130, 90, 'Facebook'),
-(26, 'Server GI5', 25, 35, 'CharGI7', 'WeaponGI7', 3200, 130, 90, 'Facebook'),
-(27, 'Server GI5', 25, 35, 'CharGI7', 'WeaponGI7', 3200, 130, 90, 'Facebook'),
-(28, 'Server GI5', 25, 35, 'CharGI7', 'WeaponGI7', 3200, 130, 90, 'Facebook'),
-(29, 'Server GI5', 25, 35, 'CharGI7', 'WeaponGI7', 3200, 130, 90, 'Facebook'),
-(30, 'Server GI6', 45, 55, 'CharGI8, CharGI9', 'WeaponGI8', 4800, 280, 140, 'Google');
-
 
 
 INSERT INTO users (username, password, email, isAdmin, is_active, locked_at, last_login, created_at, updated_at)
