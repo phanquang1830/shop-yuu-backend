@@ -124,9 +124,6 @@ INSERT INTO accounts (code, game_type, description, status, account_information,
 ('WW005', 'WutheringWaves', 'Acc WW VIP', 'chưa bán', 'Acc cao cấp', 'https://i.ytimg.com/vi/K_zyygLvmIw/maxresdefault.jpg', 'userww5', 'passww5', 2800000, 2600000, 'Khuyến mãi', '2025-11-30'),
 ('LQ008', 'LienQuan', 'Acc rank thấp', 'chưa bán', 'Acc cơ bản', 'https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-8.jpg?7', 'userlq8', 'pass8', 400000, NULL, NULL, NULL),
 ('GI007', 'Genshin', 'Acc AR 15', 'chưa bán', 'Acc mới', 'https://tse3.mm.bing.net/th/id/OIP.vCe8mQxdYrtKCd6E3JZRsAHaEK?rs=1&pid=ImgDetMain', 'usergi7', 'passgi7', 1000000, NULL, NULL, NULL);
-INSERT INTO accounts (code, game_type, description, status, account_information, img_url, username, password, price, discount_price, discount_note, discount_expire_at) VALUES
-
-
 
 INSERT INTO accounts_lq_details (account_lq_id, `rank`, level, hero_count, skin_count) VALUES
 (1, 'Cao Thủ', 30, 100, 50),
