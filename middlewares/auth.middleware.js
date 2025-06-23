@@ -6,7 +6,7 @@ const protect = asyncHandler(async (req, res, next) =>{
     const authHeader = req.headers.authorization;
 
     if(!authHeader || !authHeader.startsWith('Bearer')) {
-        throw new UnauthorizedError("Chưa có token, vui lòng đăng nhập!")
+        throw new UnauthorizedError("Vui lòng đăng nhập để thực hiện thao tác này!")
     }
 
     const token = authHeader.split(" ")[1];
