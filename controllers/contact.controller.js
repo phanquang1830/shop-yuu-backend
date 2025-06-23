@@ -4,6 +4,7 @@ import { ContactMessage } from "../models/index.model.js";
 
 const contact = asyncHandler(async (req, res) => {
   const { name, email, message } = req.body ?? {};
+  console.log("🌟 Nhận dữ liệu contact:", req.body);
 
   // Validate input
   if (!name || !email || !message) {
@@ -12,6 +13,7 @@ const contact = asyncHandler(async (req, res) => {
 
   // Save contact message to database
   await ContactMessage.create({ name, email, message });
+  console.log("✅ Đã lưu contact:", newContact);
 
   // Send email to admin
   await transporter.sendMail({
@@ -22,7 +24,11 @@ const contact = asyncHandler(async (req, res) => {
   });
 
   // Success response
-  return res.status(200).json({ message: "Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!" });
+  return res
+    .status(200)
+    .json({
+      message: "Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất!",
+    });
 });
 
 export default contact;
