@@ -13,7 +13,6 @@ const contact = asyncHandler(async (req, res) => {
 
   // Save contact message to database
   await ContactMessage.create({ name, email, message });
-  console.log("✅ Đã lưu contact:", newContact);
 
   // Send email to admin
   await transporter.sendMail({
