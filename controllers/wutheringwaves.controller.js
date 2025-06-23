@@ -29,7 +29,7 @@ const getAccountWWById = asyncHandler(async (req, res) => {
   return res.json({
     statusCode: 200,
     message: "Get Account Wuthering Waves by id Successfully!",
-    data: account,
+    account: account,
   });
 });
 
