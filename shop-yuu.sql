@@ -166,8 +166,3 @@ VALUES
 ('eva', 'evaeva', 'eva@example.com', FALSE, TRUE, NULL, '2025-06-03 11:00:00', '2025-04-01 10:10:00', '2025-06-03 11:00:00'),
 ('frank', 'frankie', 'frank@example.com', FALSE, FALSE, '2025-05-01 12:00:00', '2025-04-30 23:59:00', '2025-02-01 08:30:00', '2025-05-01 12:00:00'),
 ('grace', 'grace123', 'grace@example.com', FALSE, TRUE, NULL, '2025-06-04 13:00:00', '2025-05-05 17:20:00', '2025-06-04 13:00:00');
-
-
-select * from accounts
-select * from users
-
