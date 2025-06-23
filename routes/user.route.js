@@ -1,5 +1,5 @@
 import express from "express";
-import { getProfile, updateProfile } from "../controllers/user.controller.js";
+import { getProfile, updateProfile, getAllUsers, getUserById, createUser, updateUser, deleteUser } from "../controllers/user.controller.js";
 import protect from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/upload.middleware.js";
 import handleMulterError from "../middlewares/multerError.middleware.js";
@@ -16,5 +16,14 @@ router.put(
   handleMulterError,
   updateProfile
 );
+
+router.route("/")
+  .get(getAllUsers)
+  .post(upload.single("avatar"),createUser)
+
+router.route("/:id")
+  .get(getUserById)
+  .put(upload.single("avatar"),updateUser)
+  .delete(deleteUser)
 
 export default router;
