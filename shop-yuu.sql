@@ -1,5 +1,5 @@
 CREATE DATABASE Shopyuu;
-USE Shopyuu;
+--USE Shopyuu;
 
 CREATE TABLE accounts (
     account_id INT AUTO_INCREMENT PRIMARY KEY,
