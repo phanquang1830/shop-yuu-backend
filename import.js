@@ -1,16 +1,34 @@
-import fs from "fs";
-import path from "path";
-import sequelize from "./config/db.js"; // đường dẫn đúng tới file anh đã viết
+import fs from 'fs/promises';
+import sequelize from './configs/db.js'; // Đường dẫn tới file kết nối Sequelize của anh
 
-const sqlPath = path.join(process.cwd(), "shop-yuu.sql");
+(async () => {
+  try {
+    console.log('👉 Đang đọc file SQL...')
+    const sql = await fs.readFile('./data.sql', 'utf-8');
 
-try {
-  const sql = fs.readFileSync(sqlPath, "utf8");
+    // Tách từng câu SQL theo dấu chấm phẩy
+    const statements = sql
+      .split(';')
+      .map(s => s.trim())
+      .filter(s => s.length > 0 && !s.startsWith('--'));
 
-  await sequelize.query(sql);
-  console.log("✅ Import thành công dữ liệu từ shop-yuu.sql vào MySQL Railway!");
-  process.exit(0);
-} catch (err) {
-  console.error("❌ Lỗi khi import SQL:", err.message);
-  process.exit(1);
-}
+    console.log(`📦 Có ${statements.length} câu SQL sẽ được thực thi:`);
+
+    for (const [i, statement] of statements.entries()) {
+      try {
+        await sequelize.query(statement);
+        console.log(`✅ Lệnh ${i + 1} chạy xong`);
+      } catch (err) {
+        console.error(`❌ Lỗi ở lệnh ${i + 1}:`, statement);
+        console.error(err.message);
+        break; // Nếu 1 câu lỗi thì dừng lại luôn
+      }
+    }
+
+    console.log('🎉 Đã import xong dữ liệu!');
+    process.exit(0);
+  } catch (err) {
+    console.error('❌ Lỗi khi đọc/chạy file SQL:', err.message);
+    process.exit(1);
+  }
+})();
